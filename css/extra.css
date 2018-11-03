@@ -1,15 +1,27 @@
 img.img1 {
   max-width: 699px;
 }
-span.highlight-addressbar {
+p.par1 {
+  font-size: 90%;
+}
+span.highlight-addressbar,
+span.highlight-addressbar2 {
   position: absolute;
   display: block;
-  top: 20.75%;
-  left: 32%;
-  width: 39%;
   height: 20px;
   color: #8e24aa;
   border: 2px solid #8e24aa;
+}
+
+span.highlight-addressbar {
+  top: 20.75%;
+  left: 32%;
+  width: 39%;
+}
+span.highlight-addressbar2 {
+  top: 34.5%;
+  left: 38%;
+  width: 9%;
 }
 span.highlight-addressbar span {
   display: inline-block;
@@ -21,5 +33,21 @@ span.highlight-addressbar span:last-child {
   color: #3949ab;
   margin-top: 0.5%;
   font-size: 57%;
+  text-align: justify;
+}
+
+span.highlight-addressbar2 span {
+  position: relative;
+  display: inline-block;
+  top: -125%;
+  left: 115%;
+  font-size: 50%;
+}
+span.highlight-addressbar2 span:last-child {
+  color: #3949ab;
+  /*margin-top: 0.5%;*/
+  top: -385%;
+  left: 220%;
+  font-size: 45%;
   text-align: justify;
 }
