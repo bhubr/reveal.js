@@ -7,10 +7,12 @@
 }
 .reveal .flex {
   display: flex;
+  flex-wrap: wrap;
 }
-.flex > div {
-  width: 46%;
-  padding: 0 2%;
+.reveal .col-2 > * {
+  box-sizing: border-box;
+  width: 44%;
+  padding: 0 3%;
 }
 p.par1 {
   font-size: 90%;
@@ -62,16 +64,23 @@ span.highlight-addressbar2 span:last-child {
   font-size: 45%;
   text-align: justify;
 }
-.software-servers {
+/*.software-servers {
   flex-wrap: wrap;
+}
+*/
+.reveal section img.rack {
+  margin: 2% 0;
 }
 .software-servers div {
   padding: 1%;
-  margin: 1%;
+  margin: 2%;
   box-sizing: border-box;
   border: 2px solid #eee;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-.reveal section img.rack {
-  margin: 1% 0;
+.reveal .servers > * {
+  max-height: 400px;
 }
