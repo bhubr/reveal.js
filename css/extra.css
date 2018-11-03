@@ -1,5 +1,16 @@
-img.img1 {
+.reveal section img {
+  max-width: 100%;
+}
+.reveal section img.img1 {
   max-width: 699px;
+  background: #fff;
+}
+.reveal .flex {
+  display: flex;
+}
+.flex > div {
+  width: 46%;
+  padding: 0 2%;
 }
 p.par1 {
   font-size: 90%;
@@ -50,4 +61,17 @@ span.highlight-addressbar2 span:last-child {
   left: 220%;
   font-size: 45%;
   text-align: justify;
+}
+.software-servers {
+  flex-wrap: wrap;
+}
+.software-servers div {
+  padding: 1%;
+  margin: 1%;
+  box-sizing: border-box;
+  border: 2px solid #eee;
+  border-radius: 5px;
+}
+.reveal section img.rack {
+  margin: 1% 0;
 }
