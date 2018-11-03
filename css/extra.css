@@ -1,0 +1,25 @@
+img.img1 {
+  max-width: 699px;
+}
+span.highlight-addressbar {
+  position: absolute;
+  display: block;
+  top: 20.75%;
+  left: 32%;
+  width: 39%;
+  height: 20px;
+  color: #8e24aa;
+  border: 2px solid #8e24aa;
+}
+span.highlight-addressbar span {
+  display: inline-block;
+  margin-top: 6%;
+  margin-left: 45%;
+  font-size: 70%;
+}
+span.highlight-addressbar span:last-child {
+  color: #3949ab;
+  margin-top: 0.5%;
+  font-size: 57%;
+  text-align: justify;
+}
