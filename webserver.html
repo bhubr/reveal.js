@@ -279,11 +279,14 @@ server {
 
   root /var/www/html;
 
+  index index.html index.html index.nginx-debian.html;
+
   # ...
 }</code></pre>
           <ul class="fragment" style="font-size: 80%">
             <li><code>listen</code> indique le port</li>
-            <li><code>root</code> indique le chemin d'où le serveur lit les fichiers (racine des documents ou <em>document root</em>).</li>
+            <li><code>root</code> : chemin (<em>document root</em>) d'où le serveur lit les fichiers</li>
+            <li><code>index</code> : fichiers index, par ordre de priorité</li>
           </ul>
         </section>
         <section>
