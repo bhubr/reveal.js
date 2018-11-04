@@ -134,6 +134,36 @@
           </ul>
         </section>
         <section>
+          <h4>Les <em>ports</em> #1</h4>
+          <p>Un programme serveur est un programme "résident" : il fonctionne en permanence.</p>
+          <p class="fragment">La plupart du temps, il est en attente de requêtes&nbsp;: il "écoute".</p>
+          <p class="fragment">Chaque programme serveur écoute sur un "canal" différent : on appelle ces canaux des <em>ports</em>.</p>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #2</h4>
+          <p>Les ports sont standardisés et <em>numérotés</em></p>
+          <ul class="fragment">
+            <li>80 : HTTP</li>
+            <li>443 : HTTPS (HTTP sécurisé)</li>
+            <li>21 : FTP</li>
+            <li>110 : POP3</li>
+            <li>etc.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #3</h4>
+          <img style="background: #ddd" src="images/ports.png" alt="Illustration ports" />
+          <p class="fragment" style="font-size: 90%">Le programme client se connecte au programme serveur en ciblant le port sur lequel ce dernier écoute.</p>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #4</h4>
+          <p>La plupart du temps, on n'a pas besoin de préciser le port : par défaut, le client utilise le port adéquat.</p>
+          <ul>
+            <li>Les navigateurs choisissent le port 80 (HTTP), 443 (HTTPS), 21 (FTP) intelligemment.</li>
+            <li>Les clients de messagerie choisissent le bon port en fonction de la configuration du compte utilisateur (notamment du type de serveur, POP3 ou IMAP).</li>
+          </ul>
+        </section>
+        <section>
           <p>Serveurs HTTP Open Source</p>
           <div class="flex col-2 web-servers">
             <div>
@@ -223,36 +253,6 @@ RETR 1</code></pre>
           </div>
         </section>
         <section>
-          <h4>Les <em>ports</em> #1</h4>
-          <p>Un programme serveur est un programme "résident" : il fonctionne en permanence.</p>
-          <p class="fragment">La plupart du temps, il est en attente de requêtes&nbsp;: il "écoute".</p>
-          <p class="fragment">Chaque programme serveur écoute sur un "canal" différent : on appelle ces canaux des <em>ports</em>.</p>
-        </section>
-        <section>
-          <h4>Les <em>ports</em> #2</h4>
-          <p>Les ports sont standardisés et <em>numérotés</em></p>
-          <ul class="fragment">
-            <li>80 : HTTP</li>
-            <li>443 : HTTPS (HTTP sécurisé)</li>
-            <li>21 : FTP</li>
-            <li>110 : POP3</li>
-            <li>etc.</li>
-          </ul>
-        </section>
-        <section>
-          <h4>Les <em>ports</em> #3</h4>
-          <img style="background: #ddd" src="images/ports.png" alt="Illustration ports" />
-          <p class="fragment">Le programme client se connecte au programme serveur en ciblant un certain port (ex : paramètre donné à telnet).</p>
-        </section>
-        <section>
-          <h4>Les <em>ports</em> #4</h4>
-          <p>La plupart du temps, on n'a pas besoin de préciser le port : par défaut, le client utilise le port adéquat.</p>
-          <ul>
-            <li>Les navigateurs choisissent le port 80 (HTTP), 443 (HTTPS), 21 (FTP) intelligemment.</li>
-            <li>Les clients de messagerie choisissent le bon port en fonction de la configuration du compte utilisateur (notamment du type de serveur, POP3 ou IMAP).</li>
-          </ul>
-        </section>
-        <section>
           <h4>Retour aux serveurs web</h4>
           <p>Traitement d'une requête</p>
           <ul style="font-size: 80%">
@@ -264,6 +264,54 @@ RETR 1</code></pre>
             <li class="fragment">Sinon, envoyer une erreur 404</li>
           </ul>
         </section>
+        <section>
+          <h4>nginx #1 - Installation</h4>
+          <pre class="fragment"><code>sudo apt-get install nginx</code></pre>
+          <p class="fragment"><a href="http://localhost">http://localhost</a></p>
+        </section>
+        <section>
+          <h4>nginx #2 - Configuration</h4>
+          <pre class="fragment">
+            <code># Fichier /etc/nginx/sites-enabled/default
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  root /var/www/html;
+
+  # ...
+}</code></pre>
+          <ul class="fragment" style="font-size: 80%">
+            <li><code>listen</code> indique le port</li>
+            <li><code>root</code> indique le chemin d'où le serveur lit les fichiers (racine des documents ou <em>document root</em>).</li>
+          </ul>
+        </section>
+        <section>
+          <h4>nginx #3 - Créer son propre index</h4>
+          <pre class="fragment"><code>sudo nano /var/www/html/index.html</code></pre>
+          <p class="fragment">
+            Y écrire un contenu HTML basique
+            <pre class="fragment"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;It works!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+          </p>
+          <p class="fragment">Vérifier : <a href="http://localhost">http://localhost</a></p>
+        </section>
+        <section>
+          <h4>nginx #4 - Fichiers journaux</h4>
+          <p>
+            Les journaux (<em>logs</em>) permettent au serveur de sauvegarder des informations :
+            <ul>
+              <li>sur les accès :<br><code class="inline-code">sudo tail -f /var/log/nginx/access.log</code></li>
+              <li>sur les erreurs :<br><code class="inline-code">sudo tail -f /var/log/nginx/error.log</code></li>
+            </ul>
+          </p>
+        </section>
+        <section><em>That's all folks!</em></section>
 			</div>
 		</div>
 
