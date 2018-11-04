@@ -29,6 +29,7 @@
 			<div class="slides">
 				<section>
           <p>Le web, côté serveur</p>
+          <p class="fragment"><a href="https://pres.wild31.com" target="_blank">https://pres.wild31.com</a></p>
           <p class="fragment">D'abord, un peu de contexte...</p>
         </section>
 				<section>
@@ -133,7 +134,7 @@
           </ul>
         </section>
         <section>
-          <p>Serveurs web Open Source</p>
+          <p>Serveurs HTTP Open Source</p>
           <div class="flex col-2 web-servers">
             <div>
               <a href="http://httpd.apache.org/" target="_blank">
@@ -147,6 +148,37 @@
             </div>
           </div>
           <p class="fragment"><br>Si on n'a pas besoin de toutes les fonctionnalités d'un tel serveur, de nombreux langages proposent des <a href="https://gist.github.com/willurd/5720255" target="_blank">serveurs</a> plus légers.</p>
+        </section>
+        <section>
+          <p>Clients HTTP</p>
+          <ul>
+            <li class="fragment">Les navigateurs</li>
+            <li class="fragment"><a href="https://www.getpostman.com/" target="_blank">Postman</a> pour tester des APIs</li>
+            <li class="fragment"><code>curl</code> et <code>wget</code> en ligne de commande</li>
+            <li class="fragment"><code>httrack</code> pour "aspirer" des sites</li>
+            <li class="fragment"><code>telnet</code>, client universel (non spécifique à HTTP)</li>
+          </ul>
+        </section>
+        <section>
+          <p>Un peu de pratique, dans le terminal</p>
+          <ul class="fragment" style="font-size: 80%">
+            <li><code>wget</code> : récupérer <a href="monsite.tar.gz">l'archive</a></li>
+            <li><code>tar</code> : décompresser l'archive</li>
+          </ul>
+          <pre class="fragment" style="margin: 0 auto">
+            <code>  wget https://pres.wild31.com/monsite.tar.gz
+  tar xvzf monsite.tar.gz
+  cd monsite</code>
+          </pre>
+          <p class="fragment no-margin">Lancer un serveur avec Python</p>
+          <pre class="fragment no-margin">
+            <code>
+              python3 -m http.server 5000
+            </code>
+          </pre>
+          <p class="fragment">
+            <a href="http://localhost:5000" target="_blank">http://localhost:5000</a>
+          </p>
         </section>
 			</div>
 		</div>

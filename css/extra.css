@@ -111,3 +111,6 @@ span.highlight-addressbar2 span:last-child {
 .reveal div.web-servers img {
   background-color: #1a1a1a;
 }
+.reveal .no-margin {
+  margin: 0 auto;
+}
