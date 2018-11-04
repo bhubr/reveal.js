@@ -114,3 +114,12 @@ span.highlight-addressbar2 span:last-child {
 .reveal .no-margin {
   margin: 0 auto;
 }
+.reveal pre code {
+  padding: 10px;
+}
+.reveal code.inline-code {
+  padding: 2px 10px;
+  background: #555;
+  color: #eee;
+  font-size: 80%;
+}

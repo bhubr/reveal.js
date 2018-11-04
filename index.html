@@ -166,19 +166,103 @@
             <li><code>tar</code> : décompresser l'archive</li>
           </ul>
           <pre class="fragment" style="margin: 0 auto">
-            <code>  wget https://prez.wild31.com/monsite.tar.gz
-  tar xvzf monsite.tar.gz
-  cd monsite</code>
+            <code>wget https://prez.wild31.com/monsite.tar.gz
+tar xvzf monsite.tar.gz
+cd monsite</code>
           </pre>
           <p class="fragment no-margin">Lancer un serveur avec Python</p>
           <pre class="fragment no-margin">
-            <code>
-              python3 -m http.server 5000
-            </code>
+            <code>python3 -m http.server 5000</code>
           </pre>
           <p class="fragment">
             <a href="http://localhost:5000" target="_blank">http://localhost:5000</a>
           </p>
+        </section>
+        <section>
+          On peut consulter le site de différentes façons :
+          <ul>
+            <li>Via le navigateur</li>
+            <li>Avec Postman</li>
+            <li>Avec <code>wget</code> : <code class="inline-code">wget http://localhost:5000</code></li>
+            <li>Avec <code>telnet</code> : <code class="inline-code">telnet localhost 5000</code></li>
+          </ul>
+        </section>
+        <section>
+          <p>Une requête HTTP avec telnet</p>
+          <pre><code>wilder@ubuntu:~$ telnet localhost 5000
+Trying ::1...
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.</code></pre>
+          <div class="fragment">
+            <p>Une fois lancé, saisir</p>
+            <pre><code>GET /</code></pre>
+          </div>
+        </section>
+        <section>
+          <p>Différence avec un autre protocole<br>Exemple POP3</p>
+          <p style="font-size: 75%">1. Installation d'un serveur POP3 factice</p>
+          <pre><code>git clone https://github.com/andris9/n3.git
+cd n3
+npm install
+node pop3_server</code></pre>
+        </section>
+        <section>
+          <p>Exemple POP3 - 2. Dialogue avec telnet</p>
+          <pre><code>wilder@ubuntu:~$ telnet localhost 110
+Trying ::1...
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.</code></pre>
+          <div class="fragment">
+            <p>Une fois lancé, saisir</p>
+            <pre><code>USER anyone
+PASS 12345
+LIST
+RETR 1</code></pre>
+          </div>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #1</h4>
+          <p>Un programme serveur est un programme "résident" : il fonctionne en permanence.</p>
+          <p class="fragment">La plupart du temps, il est en attente de requêtes&nbsp;: il "écoute".</p>
+          <p class="fragment">Chaque programme serveur écoute sur un "canal" différent : on appelle ces canaux des <em>ports</em>.</p>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #2</h4>
+          <p>Les ports sont standardisés et <em>numérotés</em></p>
+          <ul class="fragment">
+            <li>80 : HTTP</li>
+            <li>443 : HTTPS (HTTP sécurisé)</li>
+            <li>21 : FTP</li>
+            <li>110 : POP3</li>
+            <li>etc.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #3</h4>
+          <img style="background: #ddd" src="images/ports.png" alt="Illustration ports" />
+          <p class="fragment">Le programme client se connecte au programme serveur en ciblant un certain port (ex : paramètre donné à telnet).</p>
+        </section>
+        <section>
+          <h4>Les <em>ports</em> #4</h4>
+          <p>La plupart du temps, on n'a pas besoin de préciser le port : par défaut, le client utilise le port adéquat.</p>
+          <ul>
+            <li>Les navigateurs choisissent le port 80 (HTTP), 443 (HTTPS), 21 (FTP) intelligemment.</li>
+            <li>Les clients de messagerie choisissent le bon port en fonction de la configuration du compte utilisateur (notamment du type de serveur, POP3 ou IMAP).</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Retour aux serveurs web</h4>
+          <p>Traitement d'une requête</p>
+          <ul style="font-size: 80%">
+            <li class="fragment">Vérifier si le chemin demandé correspond à un fichier (à partir de la <em>racine des documents</em>), et l'envoyer s'il existe</li>
+            <li class="fragment">Sinon, si le chemin correspond à un répertoire<ul>
+              <li>envoyer <code>index.html</code> s'il existe dans ce répertoire</li>
+              <li>lister le contenu du répertoire sinon</li>
+            </ul></li>
+            <li class="fragment">Sinon, envoyer une erreur 404</li>
+          </ul>
         </section>
 			</div>
 		</div>
