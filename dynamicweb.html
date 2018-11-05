@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Le web dynamique</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/night.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- My own css -->
+    <link rel="stylesheet" href="css/extra.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h4>Le web dynamique</h4>
+          <p class="fragment">Dans la <a href="webserver.html">présentation précédente</a>, on a utilisé des serveurs web pour héberger des sites <em>statiques</em>, dont les pages sont lues depuis le disque dur, et envoyées telles quelles aux clients.</p>
+          <p class="fragment">On va aborder ici les pages, générées dynamiquement <em>côté serveur</em>.</p>
+        </section>
+        <section>
+          <h4>CGI #1</h4>
+          <p>La génération dynamique de pages a été rendue possible par l'apparition du standard CGI (<a href target="_blank" href="https://fr.wikipedia.org/wiki/Common_Gateway_Interface">Common Gateway Interface</a>) en 1993.</p>
+          <p class="fragment">Le principe : faire fonctionner le serveur web avec un programme externe.</p>
+        </section>
+        <section>
+          <h4>CGI #2</h4>
+          <p>Le serveur web transmet les paramètres de la requête au programme externe.</p>
+          <p class="fragment">Le programme externe génère dynamiquement du contenu HTML et le renvoie au serveur web.</p>
+          <p class="fragment">Le serveur web renvoie ce contenu au client.</p>
+        </section>
+        <section>
+          <h4>CGI #3</h4>
+          <p><img src="images/CGI_common_gateway_interface.png" alt="CGI" /></p>
+          <p class="fragment" style="font-size: 90%">CGI définit un "standard" pour les communications entre le serveur web et le programme externe<br>(Gateway Program, souvent appelé "script CGI").</p>
+        </section>
+        <section>
+          <h4>CGI #4</h4>
+          <p>On passe par un programme externe, car le serveur web n'est pas fait pour se connecter à une base de données.</p>
+          <p class="fragment">Comme CGI est un standard, on peut écrire des scripts CGI dans tout langage.</p>
+          <p class="fragment">Les langages C et Perl étaient largement utilisés, avant d'être supplantés par d'autres.</p>
+          <p class="fragment">Parmi ceux-ci... PHP a connu un grand succès.</p>
+        </section>
+        <section>
+          <h4>PHP #1 - Interface avec le serveur</h4>
+          <p>PHP communique avec le serveur via CGI</p>
+          <p><img style="background: #ddd" src="images/Scheme_dynamic_page_en.svg" alt="PHP et CGI" /></p>
+        </section>
+        <section>
+          <h4>PHP #2 - Installation</h4>
+          <pre><code>sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php7.2 php7.2-common php7.2-cli php7.2-fpm</code></pre>
+        </section>
+        <section>
+          <h4>PHP #3 - Configuration</h4>
+          <p style="font-size: 76%">Un fichier à récupérer (via <code>wget</code>) et à copier dans le dossier de configuration de Nginx, après sauvegarde de l'original.</p>
+          <pre><code style="font-size: 76%">sudo wget https://prez.wild31.com/dl/default
+sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+sudo cp default /etc/nginx/sites-available/
+sudo service nginx reload</code></pre>
+        </section>
+        <section>
+          <h4>PHP #4 - Hello World</h4>
+          <p>On peut mélanger HTML et code PHP...</p>
+          <pre><code style="font-size: 76%">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;?php echo &quot;Hello World&quot;; ?&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <ul>
+          <li>Copier ce code dans un fichier <code>hello.php</code>&nbsp;:<br>
+            <code class="inline-code">nano /var/www/html/hello.php</code>
+          </li>
+          <li><a href="http://localhost/hello.php">http://localhost/hello.php</a></li>
+        </ul>
+        </section>
+        <section>
+          <h4>PHP #5 - Afficher une liste</h4>
+          <pre><code style="font-size: 76%">&#x3C;?php
+$title = &#x22;My online store&#x22;;
+$articles = [
+  &#x22;Desktop Computer&#x22;,
+  &#x22;Laptop Computer&#x22;,
+  &#x22;Smartphone&#x22;
+]; ?&#x3E;
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;h1&#x3E;&#x3C;?php echo $title; ?&#x3E;&#x3C;/h1&#x3E;
+    &#x3C;ul&#x3E;
+    &#x3C;?php
+        // Boucle sur le tableau articles
+        for($i = 0 ; $i &#x3C; count($articles) ; $i++) {
+            // Concat&#xE9;nation en PHP (caract&#xE8;re . au lieu de + en JS)
+            echo &#x27;&#x3C;li&#x3E;&#x27; . $articles[$i] . &#x27;&#x3C;/li&#x3E;&#x27;;
+        }
+    ?&#x3E;
+    &#x3C;/ul&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+        <ul class="list-small">
+          <li><code class="inline-code">nano /var/www/html/store.php</code></li>
+          <li><a href="http://localhost/store.php">http://localhost/store.php</a></li>
+        </ul>
+        </section>
+        <section>
+          <h4>PHP #6 - Afficher une liste filtrée</h4>
+          <pre><code style="font-size: 76%">&#x3C;?php
+$title = &#x22;My search engine&#x22;;
+$apps = [
+  &#x22;Google Tasks - todolist app&#x22;,
+  &#x22;Todoist - todolist app&#x22;,
+  &#x22;Evernote - todolist app&#x22;,
+  &#x22;Waze - traffic app&#x22;,
+  &#x22;Spotify - music app&#x22;,
+  &#x22;Deezer - music app&#x22;,
+  &#x22;Shazam - music app&#x22;
+];
+// V&#xE9;rifie la pr&#xE9;sence d&#x27;un param&#xE8;tre ?search=XYZ dans l&#x27;URL
+$isSearching = isset($_GET[&#x27;search&#x27;]);
+
+// Filtre les apps en fonction de la recherche
+$results = ! $isSearching
+    ? []
+    : array_filter($apps, function($app) {
+        // Convertit le nom d&#x27;app en minuscules
+        $appLowerCase = strtolower($app);
+        // Renvoie true si le nom d&#x27;app contient le terme recherch&#xE9;
+        return strpos($appLowerCase, strtolower($_GET[&#x27;search&#x27;]));
+    });
+?&#x3E;
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;h1&#x3E;&#x3C;?php echo $title; ?&#x3E;&#x3C;/h1&#x3E;
+    &#x3C;form&#x3E;
+        &#x3C;input name=&#x22;search&#x22; /&#x3E;
+        &#x3C;p&#x3E;&#x3C;em&#x3E;Essayer &#x22;music&#x22;, &#x22;todolist&#x22;&#x3C;/em&#x3E;&#x3C;/p&#x3E;
+        &#x3C;button type=&#x22;submit&#x22;&#x3E;Rechercher&#x3C;/button&#x3E;
+    &#x3C;/form&#x3E;
+    &#x3C;ul&#x3E;
+    &#x3C;?php
+        if($isSearching) {
+            // Boucle sur le tableau results
+            foreach($results as $app) {
+                // Concat&#xE9;nation en PHP (caract&#xE8;re . au lieu de + en JS)
+                echo &#x27;&#x3C;li&#x3E;&#x27; . $app . &#x27;&#x3C;/li&#x3E;&#x27;;
+            }
+        }
+    ?&#x3E;
+    &#x3C;/ul&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</code></pre>
+        <ul class="list-small">
+          <li><code class="inline-code">nano /var/www/html/search.php</code></li>
+          <li><a href="http://localhost/store.php">http://localhost/search.php</a></li>
+        </ul>
+        </section>
+        <section><em>That's all, folks!</em></section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+</html>

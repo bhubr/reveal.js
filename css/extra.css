@@ -124,6 +124,9 @@ span.highlight-addressbar2 span:last-child {
   font-size: 80%;
 }
 .reveal ul.nginx-config li,
-.reveal ul.nginx-config li code {
+.reveal ul.nginx-config li code,
+.reveal ul.list-small li,
+.reveal ul.list-small li a,
+.reveal ul.list-small li code {
   font-size: 75%;
 }
