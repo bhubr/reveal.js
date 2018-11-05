@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Présentations</title>
+		<title>Le web, côté serveur</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/night.css">
@@ -271,8 +271,9 @@ RETR 1</code></pre>
         </section>
         <section>
           <h4>nginx #2 - Configuration</h4>
+          <p style="font-size: 80%;color: red">Rien à modifier ici !</p>
           <pre class="fragment">
-            <code># Fichier /etc/nginx/sites-enabled/default
+            <code style="font-size: 70%"># Fichier /etc/nginx/sites-enabled/default
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
@@ -283,15 +284,24 @@ server {
 
   # ...
 }</code></pre>
-          <ul class="fragment" style="font-size: 80%">
+          <ul class="fragment nginx-config" style="font-size: 80%">
             <li><code>listen</code> indique le port</li>
             <li><code>root</code> : chemin (<em>document root</em>) d'où le serveur lit les fichiers</li>
             <li><code>index</code> : fichiers index, par ordre de priorité</li>
           </ul>
         </section>
         <section>
-          <h4>nginx #3 - Créer son propre index</h4>
-          <pre class="fragment"><code>sudo nano /var/www/html/index.html</code></pre>
+          <h4>nginx #3 - Droits d'accès</h4>
+          <p>Par défaut, un utilisateur "normal" ne peut pas écrire vers la racine des documents <code>/var/www/html</code>.</p>
+          <p>Pour y remédier :</p>
+          <pre>
+            <code>sudo chmod -R 775 /var/www/html
+sudo usermod -a -G www-data wilder</code></pre>
+          <p style="color: red">Fermer et réouvrir sa session juste après !</p>
+        </section>
+        <section>
+          <h4>nginx #4 - Créer son propre index</h4>
+          <pre class="fragment"><code>nano /var/www/html/index.html</code></pre>
           <p class="fragment">
             Y écrire un contenu HTML basique
             <pre class="fragment"><code>&lt;!DOCTYPE html&gt;
@@ -305,7 +315,7 @@ server {
           <p class="fragment">Vérifier : <a href="http://localhost">http://localhost</a></p>
         </section>
         <section>
-          <h4>nginx #4 - Fichiers journaux</h4>
+          <h4>nginx #5 - Fichiers journaux</h4>
           <p>
             Les journaux (<em>logs</em>) permettent au serveur de sauvegarder des informations :
             <ul>

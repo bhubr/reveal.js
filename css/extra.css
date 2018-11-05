@@ -123,3 +123,7 @@ span.highlight-addressbar2 span:last-child {
   color: #eee;
   font-size: 80%;
 }
+.reveal ul.nginx-config li,
+.reveal ul.nginx-config li code {
+  font-size: 75%;
+}
