@@ -27,7 +27,7 @@ $queryResult = $database->query(
           .then(res => res.json())
           .then(employees => {
             const items = employees.map(
-              item => '<li>' + item.firstname + ' ' + item.lastname + '</li>';
+              item => '<li>' + item.firstname + ' ' + item.lastname + '</li>'
             ).join('');
             document.getElementById('list').innerHTML += items;
           });
