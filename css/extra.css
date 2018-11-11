@@ -9,10 +9,11 @@
   display: flex;
   flex-wrap: wrap;
 }
+.reveal .col-2 > div,
 .reveal .col-2 > * {
   box-sizing: border-box;
   width: 44%;
-  padding: 0 3%;
+  padding: 0 2%;
 }
 .reveal .col-3 > * {
   box-sizing: border-box;
@@ -21,6 +22,9 @@
 }
 p.par1 {
   font-size: 90%;
+}
+p.text-sm {
+  font-size: 75%;
 }
 span.highlight-addressbar,
 span.highlight-addressbar2 {
@@ -129,4 +133,39 @@ span.highlight-addressbar2 span:last-child {
 .reveal ul.list-small li a,
 .reveal ul.list-small li code {
   font-size: 75%;
+}
+div.cgi {
+  position: relative;
+}
+div.cgi p {
+  font-size: 75%;
+}
+div.cgi img {
+  border: none;
+  background: #000;
+}
+/* div.cgi span {
+  position: absolute;
+  color: #8e24aa;
+} */
+div.cgi div:first-child,
+div.cgi ol:first-child {
+  text-align: left;
+  width: 35%;
+}
+.reveal .slides section div.cgi ol {
+  padding-left: 0;
+}
+div.cgi div:nth-child(2) {
+  width: 58%;
+  padding-left: 1%;
+}
+.reveal .slides section .fragment.step-fade-in-then-out {
+	opacity: 0;
+	display: none; }
+.reveal .slides section .fragment.step-fade-in-then-out.current-fragment {
+	opacity: 1;
+  display: inline; }
+.lightblue {
+  color: #acf
 }
