@@ -9,7 +9,7 @@ $queryResult = $database->query(
 );
 $resultsArray = [];
 while ($row = $queryResult->fetch()) {
-    array_push($resultsArray, '<li>' . $row['firstname'] . ' ' . $row['lastname'] . '</li>');
+    array_push($resultsArray, $row);
 }
 header('Content-Type: application/json');
 echo json_encode($resultsArray);
