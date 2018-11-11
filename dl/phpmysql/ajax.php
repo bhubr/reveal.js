@@ -21,11 +21,12 @@ $queryResult = $database->query(
     </ul>
     <button id="load-more">Load more</button>
     <script>
-      var page = 0;
+      let page = 1;
       document.getElementById('load-more').addEventListener('click', function() {
         fetch('ajax-load-more.php?offset=' + (page * 10))
           .then(res => res.json())
           .then(employees => {
+            page += 1;
             const items = employees.map(
               item => '<li>' + item.firstname + ' ' + item.lastname + '</li>'
             ).join('');
