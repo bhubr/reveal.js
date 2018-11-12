@@ -150,6 +150,7 @@ sudo mv phpmysql /var/www/html/
 mysql -uroot -p < /var/www/html/phpmysql/setup.sql</code></pre>
           </p>
           <p class="text-sm fragment">Puis visiter <a target="_blank" href="http://localhost/phpmysql/employees.php">http://localhost/phpmysql/employees.php</a></p>
+          <p class="text-sm fragment">En cas de problème, <a target="_blank" href="https://prez.wild31.com/dl/phpmysql/index.php">voir ici</a></p>
         </section>
         <section>
           <h4>Explication (rapide) du code</h4>
@@ -163,6 +164,38 @@ mysql -uroot -p < /var/www/html/phpmysql/setup.sql</code></pre>
   echo '<li>' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
 }</code></pre>
           <p class="text-sm fragment">Le <a target="_blank" href="view-source:http://localhost/phpmysql/employees.php">source</a> de la page web indique que tout le HTML est généré par PHP, côté serveur !</p>
+        </section>
+        <section>
+          <h4>AJAX #1</h4>
+          <p class="par1">Les deux exemples précédents montrent une page entièrement générée, en une seule fois, par PHP.</p>
+          <p class="par1 fragment">AJAX (Asynchronous JavaScript And XML) a représenté l'évolution suivante des applications web.</p>
+          <p class="par1 fragment">La page HTML est toujours chargée depuis le serveur.</p>
+          <p class="par1 fragment">Mais la technologie XmlHttpRequest, introduite en 1998 (l'ancêtre de fetch), a permis d'envoyer des requêtes via du code JavaScript, sans recharger toute la page.</p>
+        </section>
+        <section>
+          <h4>AJAX #2 et exemple</h4>
+          <p class="par1 fragment">Le code JavaScript envoie des requêtes, et récupère des données (HTML, XML, JSON...).</p>
+          <p class="par1 fragment">À partir de ces données, il construit un fragment de HTML qu'il insère dans le DOM (sauf si les données sont <em>déjà</em> du HTML).</p>
+          <p class="text-sm fragment"><a target="_blank" href="http://localhost/phpmysql/ajax.php">http://localhost/phpmysql/ajax.php</a></p>
+          <p class="text-sm fragment">Ouvrir l'onglet Network des outils de développement</p>
+        </section>
+        <section>
+          <h4>Single Page Apps</h4>
+          <p class="par1">Les applications écrites avec React, Angular, etc. généralisent l'utilisation d'AJAX.</p>
+          <p class="par1 fragment">On ne charge plus qu'un <code>index.html</code> depuis le serveur, et toutes les données externes requises par l'application frontend sont récupérées via des requêtes AJAX.</p>
+          <p class="par1 fragment">Dans ce cas, le programme serveur joue le rôle d'une source de données : il interroge la base de données, mais au lieu de générer du HTML, il renvoie du JSON...</p>
+          <p class="par1 fragment">Ce qu'on appelle une <a target="_blank" href="https://en.wikipedia.org/wiki/Web_API">API</a>.</p>
+        </section>
+        <section>
+          <h4>Applications serveurs modernes #1</h4>
+          <p>L'architecture basée sur CGI a eu un grand succès, et des variantes sont toujours utilisées (FastCGI pour PHP).</p>
+          <p class="fragment">D'autres langages et frameworks utilisent des architectures différentes, ayant parfois des points communs.</p>
+        </section>
+        <section>
+          <h4>Applications serveurs modernes #2</h4>
+          <p class="par2">Le framework Django utilise une architecture propre à Python pour la communication entre serveur et application.</p>
+          <p class="par2 fragment">Les applications Java EE utilisent des serveurs d'applications dédiés, tels que Tomcat ou Spring.</p>
+          <p class="par2 fragment">Node.js est encore basé sur un modèle différent : une application serveur Node.js n'a pas besoin de communiquer avec un serveur web, elle <em>fait office de serveur web</em> !</p>
         </section>
         <!-- <section>
           <h4>Afficher une liste en PHP</h4>
